@@ -1,0 +1,85 @@
+Company ElianaZaia nit "125363341" 
+{
+	dashboards = [
+		{
+			name = DashboardInsumos;
+			panels = [
+				{
+					name = PanelLista;
+					elements = [
+						{
+							name = TablaInsumos;
+							title = "Insumos Registrados";
+							registersPerPage = 20;
+							actions = {
+								name = Actions;
+								columnTitle = "Opciones";
+								position = left;
+								edit;
+							};
+							columns = [
+								{
+									name = Nombre;
+									title = "Nombre";
+								}, 
+								{
+									name = SKU;
+									title = "SKU";	
+								},
+								{
+									name = STOCKMIN;
+									title = "Stock Minimo";	
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+	
+	DBServers = [
+		{
+			name = Servidor;
+			systemManager = MONGODB;
+			token = "axc34qwad7t32rf";
+			password = "equipo1";
+			relatedCollections = [
+				{
+					name = Insumos;
+					documents = [
+						{
+							name = Insumo;
+							attributes = [
+								{
+									name = "nombre";
+								}, 
+								{
+									name = "sku";
+								},
+								{
+									name = "stockmin";
+								}
+							]
+						},
+						{
+							name = Proveedor;
+							attributes = [
+								{
+									name = "raxonSocial";
+								}, 
+								{
+									name = "nit";
+								},
+								{
+									name = "direccion";
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
+

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="empresa" nsURI="ProyectoGrupo1" nsPrefix="ProyectoGrupo1">
+  <eClassifiers xsi:type="ecore:EClass" name="Company">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dashboards" lowerBound="1"
+        upperBound="-1" eType="#//Dashboard" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="DBServers" lowerBound="1"
+        upperBound="-1" eType="#//DBServer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dashboard">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="panels" lowerBound="1"
+        upperBound="-1" eType="#//Panel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Panel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" lowerBound="1"
+        upperBound="-1" eType="#//Element" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="registersPerPage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" eType="#//Action"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" lowerBound="1"
+        upperBound="-1" eType="#//Column" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="search" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="add" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Graphic" abstract="true" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" lowerBound="1" upperBound="-1"
+        eType="#//Data" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="legendPosition" eType="#//PositionOptions"
+        defaultValueLiteral="bottom"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" lowerBound="1"
+        upperBound="-1" eType="#//Label" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DBServer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="systemManager" unique="false"
+        eType="#//DBSystem" defaultValueLiteral="MONGODB"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="token" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relatedEntities" lowerBound="1"
+        upperBound="-1" eType="#//Entity" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DBSystem">
+    <eLiterals name="MONGODB"/>
+    <eLiterals name="REDIS" value="1" literal="REDIS"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" lowerBound="1"
+        upperBound="-1" eType="#//Attribute" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="add" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="edit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" eType="#//PositionOptions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PositionOptions">
+    <eLiterals name="left"/>
+    <eLiterals name="right" value="1"/>
+    <eLiterals name="center" value="2"/>
+    <eLiterals name="top" value="3"/>
+    <eLiterals name="bottom" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Column">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="editable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LineChart" eSuperTypes="#//Graphic2D"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BarChart" eSuperTypes="#//Graphic2D">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="barPercentage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RadarChart" eSuperTypes="#//Graphic">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="angleLinesDisplay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PieChart" eSuperTypes="#//Graphic"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Data">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="data" lowerBound="1" upperBound="-1"
+        eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="borderColor" eType="#//Colors"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="backgroundColor" eType="#//Colors"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fill" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="borderDash" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Graphic2D" abstract="true" eSuperTypes="#//Graphic">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelStringXAxes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayGridLinesXAxes"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="colorGridLinesXAxes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelStringYAxes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayGridLinesYAxes"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="colorGridLinesYAxes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Colors">
+    <eLiterals name="white" literal="#FFFFFF"/>
+    <eLiterals name="blue" value="1" literal="#0000FF"/>
+    <eLiterals name="red" value="2" literal="#FF0000"/>
+    <eLiterals name="green" value="3" literal="#00FF00"/>
+    <eLiterals name="gray" value="4" literal="#808080"/>
+    <eLiterals name="yellow" value="5" literal="#FFFF00"/>
+    <eLiterals name="black" value="6" literal="#000000"/>
+    <eLiterals name="cyan" value="8" literal="#00FFFF"/>
+    <eLiterals name="magenta" value="9" literal="#FF00FF"/>
+    <eLiterals name="silver" value="10" literal="#C0C0C0"/>
+    <eLiterals name="maroon" value="11" literal="#800000"/>
+    <eLiterals name="olive" value="12" literal="#808000"/>
+    <eLiterals name="purple" value="13" literal="#800080"/>
+    <eLiterals name="teal" value="14" literal="#008080"/>
+    <eLiterals name="navy" value="15" literal="#000080"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Label">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+</ecore:EPackage>

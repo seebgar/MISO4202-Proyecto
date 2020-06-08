@@ -1,0 +1,36 @@
+// Verificacion de nit
+operation Company invalidNit(): Boolean {
+    return self.nit.matches("(^[0-9]+-{1}[0-9]{1})");
+}
+
+// Verificar que todos los nombres de los atributos empiecen en minusculas
+operation Attribute invalidName():Boolean{
+	return self.name.matches("(^[a-z]{1}([a-z]*[A-Z]*[0-9]*)*)");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

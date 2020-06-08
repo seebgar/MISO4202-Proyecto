@@ -1,0 +1,167 @@
+Company Barini nit "770063341" 
+{
+	dashboards = [
+		{
+			name = DashboardProveedores;
+			panels = [
+				// PANEL ADMIN
+				{
+					name = PanelAdmin;
+					elements = [
+						{
+							name = TablaProveedores;
+							title = "Proveedores Registrados";
+							registersPerPage = 20;
+							actions = {
+								name = Actions;
+								columnTitle = "Opciones";
+								position = left;
+								edit;
+								delete;
+							};
+							columns = [
+								{
+									name = nombre;
+									title = "Nombre";
+								}, 
+								{
+									name = razonSocial;
+									title = "Razon Social";	
+								},
+								{
+									name = direccion;
+									title = "Contacto";	
+								}
+							]
+						},
+						{
+							name = GraficoInevntario;
+							title = "Inventario";
+							legendPosition = bottom;
+							labelStringXAxes = "Fecha";
+							labelStringYAxes = "Cantidad";
+							data = [
+								{
+									name = Dataset;
+									borderColor = blue;
+									fill;
+									data = [
+										"Servidor.Insumos"
+									]
+								}
+							]
+							labels = [
+								{
+									name = Marzo30;
+								},
+								{
+									name = Abril30;
+								},
+								{
+									name = Mayo30;
+								}
+							]
+						}
+					]
+				},
+				
+				// PANEL CLIENTE
+				{
+					name = PanelCliente;
+					elements = [
+						{
+							name = TablaProductos;
+							title = "Productos Disponibles";
+							registersPerPage = 20;
+							columns = [
+								{
+									name = nombreProducto;
+									title = "Nombre";
+								}, 
+								{
+									name = valorVenta;
+									title = "Precio";	
+								}
+							]
+						}
+					]
+				}
+			
+			]
+		}
+	]
+	
+	DBServers = [
+		{
+			name = Servidor;
+			systemManager = MONGODB;
+			token = "axc34qwad7t32rf";
+			password = "equipo1";
+			relatedCollections = [
+				{
+					name = Insumos;
+					documents = [
+					
+						{
+							name = Insumo;
+							attributes = [
+								{
+									name = "nombre";
+								}, 
+								{
+									name = "sku";
+								},
+								{
+									name = "stockmin";
+								}
+							]
+						}
+					]
+				},
+				{
+					name = Productos;
+					documents = [
+							{
+							name = Producto;
+							attributes = [
+								{
+									name = "nombre";
+								}, 
+								{
+									name = "inventario";
+								},
+								{
+									name = "costo";
+								},
+								{
+									name = "valorVentar";
+								}
+							]
+						}
+					]
+				},
+				{
+					name = Proveedores;
+					documents = [
+						{
+							name = Proveedor;
+							attributes = [
+								{
+									name = "raxonSocial";
+								}, 
+								{
+									name = "nit";
+								},
+								{
+									name = "direccion";
+								}
+							]
+						}
+					]
+				}
+				
+			]
+		}
+	]
+}
+

@@ -1,0 +1,66 @@
+import { Component } from "@angular/core";
+import { NbMenuItem } from "@nebular/theme";
+import { AuthenticationService } from "src/app/service/authentication.service";
+
+
+@Component({
+  selector: "app-sidebar",
+  template: `<nb-menu [items]="menu"></nb-menu>`,
+})
+export class SidebarComponent {
+
+  public menu: NbMenuItem[] = [];
+  
+  constructor(private authenticationService: AuthenticationService) {}
+  
+
+  ngOnInit() {
+  
+  this.menu = [
+    {
+      title: "Inicio",
+      icon: "home-outline",
+      // icon: "shopping-cart-outline",
+      home: true,
+    },
+    {
+      title: "Dashboard",
+      icon: "pie-chart-outline",
+      link: "dashboard",
+    },
+    {
+      title: "COMPONENTES",
+      group: true,
+    }, [%
+		for ( element in cp!Element.all.select(element | element.isKindOf(cp!Table) ) ) {
+	%]
+	{
+		title: "[%=element.name.toLowerCase()%]",
+		icon: "grid-outline",
+  		link: "[%=element.name.toLowerCase()%]",
+  	},
+  	[%
+  		}
+  	%]
+  	
+  	 {
+      title: "DATA",
+      group: true,
+    },
+      {
+      title: "data",
+      icon: "grid-outline",
+      link: "data",
+    },
+  ];
+  
+    if (this.authenticationService.currentUserValue.user.role === "ADMIN") {
+      this.menu.push({
+        title: "Usuarios",
+        icon: "person-outline",
+        link: "usuarios",
+      });
+    }    
+  
+  }
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated company -->
+      <package
+            uri="ProyectoGrupo1"
+            class="empresa.EmpresaPackage"
+            genModel="uniandes.mdd.grupo.uno.metamodels/xtext/company.genmodel"/>
+   </extension>
+
+</plugin>

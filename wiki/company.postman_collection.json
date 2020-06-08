@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "2711cbbf-9207-4df1-b20b-0da7216e4a94",
+		"name": "Company",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c5fffeb8-7195-4b55-ae49-eb53782652b6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7df4835b-c4a9-41ef-b177-930fb54a13ec",
+						"exec": [
+							"pm.test(\"API response con 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"\r",
+							"pm.test(\"Obtiene la info del usuario\", function () {\r",
+							"    data = pm.response.json().data;\r",
+							"    pm.expect(data.user.name).to.equals(\"Cristian Sepulveda\");\r",
+							"    pm.expect(data.user.email).to.equals(\"cristian11611@gmail.com\");\r",
+							"    pm.expect(data.user.role).to.equals(\"ADMIN\");\r",
+							"    pm.environment.set(\"access-token\", data.token);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"cristian11611@gmail.com\",\n    \"password\": \"Moto11611\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/authenticate",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd905c7a-9480-49b4-ad39-ed550acc756c",
+						"exec": [
+							"pm.test(\"API response con 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Usuario agregado con exito\", function () {\r",
+							"    message = pm.response.json().message;\r",
+							"    pm.expect(message).to.equals(\"User added successfully!!!\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "access-token",
+						"value": "{{access-token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Test Postman\",\n    \"email\": \"test@gmail.com\",\n    \"password\": \"Test11611\",\n    \"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Personal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b02e648b-9ce7-441c-9ab3-8cb9d4f5c4fe",
+						"exec": [
+							"pm.test(\"API response con 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Persona agregado con exito\", function () {\r",
+							"    data = pm.response.json();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data.nombre).to.equals(\"Juan\");\r",
+							"    pm.expect(data.apellido).to.equals(\"Hernandez\");\r",
+							"    pm.expect(data.numeroDocumento).to.equals(\"1030581679\");\r",
+							"    pm.expect(data.ciudadNacimiento).to.equals(\"Bogota\");\r",
+							"    pm.environment.set(\"id-personal\", data._id);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "access-token",
+						"value": "{{access-token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Juan\",\n    \"apellido\": \"Hernandez\",\n    \"numeroDocumento\": \"1030581679\",\n    \"ciudadNacimiento\": \"Bogota\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/personal",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"personal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar todo personal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ce66cf1-973b-487d-b145-87e400225bc5",
+						"exec": [
+							"pm.test(\"API response con 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Devuelve una lista de personal\", function () {\r",
+							"    data = pm.response.json();\r",
+							"    pm.expect(data).to.be.an('array')\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "access-token",
+						"type": "text",
+						"value": "{{access-token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Cristian\",\n    \"apellido\": \"Sepulveda\",\n    \"numeroDocumento\": \"1030581679\",\n    \"ciudadNacimiento\": \"Bogota\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/personal",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"personal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar por Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c4ed2bd-a178-4557-8ea4-9ec320b52a1c",
+						"exec": [
+							"pm.test(\"API response con 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Devuelve una lista de personal\", function () {\r",
+							"    data = pm.response.json();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data.nombre).to.equals(\"Cristian\");\r",
+							"    pm.expect(data.apellido).to.equals(\"Sepulveda\");\r",
+							"    pm.expect(data.numeroDocumento).to.equals(\"1030581679\");\r",
+							"    pm.expect(data.ciudadNacimiento).to.equals(\"Bogota\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "access-token",
+						"type": "text",
+						"value": "{{access-token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/personal/5eb33a3ebff7d1044c04fa1e",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"personal",
+						"5eb33a3ebff7d1044c04fa1e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c4ffab7-df8b-4cb9-9c8e-c5f885149d0b",
+						"exec": [
+							"pm.test(\"API response con 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Borra el personal por id creado en el metodo post\", function () {\r",
+							"    data = pm.response.json();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data.nombre).to.equals(\"Juan\");\r",
+							"    pm.expect(data.apellido).to.equals(\"Hernandez\");\r",
+							"    pm.expect(data.numeroDocumento).to.equals(\"1030581679\");\r",
+							"    pm.expect(data.ciudadNacimiento).to.equals(\"Bogota\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "access-token",
+						"type": "text",
+						"value": "{{access-token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/personal/{{id-personal}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"personal",
+						"{{id-personal}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

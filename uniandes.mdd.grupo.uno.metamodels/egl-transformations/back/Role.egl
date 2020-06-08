@@ -1,0 +1,17 @@
+[%
+	var entities = cp!Entity.all;
+	var urls = ""; 
+
+%]
+module.exports = {
+	[%for (entity in entities) { 
+	urls = urls + '"/' + entity.name.toLowerCase() + '", ' ;
+	}
+	urls = urls + '"/authenticate",' + '"/user"';
+	%]
+	CONSULTA: [[%=urls%]],
+	[%
+		urls = urls + ', "/register"';
+	%]
+	ADMIN: [[%=urls%]]
+};

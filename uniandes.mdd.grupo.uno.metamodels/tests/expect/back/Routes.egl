@@ -1,0 +1,10 @@
+const [%=entity.name%]Controller = require("../controllers/[%=entity.name.toLowerCase()%].controller");
+const route = require("../config/middleware");
+
+module.exports = function (router) {
+  router.post("/[%=entity.name.toLowerCase()%]", route.protected, [%=entity.name%]Controller.create);
+  router.get("/[%=entity.name.toLowerCase()%]", route.protected, [%=entity.name%]Controller.getAll);
+  router.get("/[%=entity.name.toLowerCase()%]/:id", route.protected, [%=entity.name%]Controller.get);
+  router.put("/[%=entity.name.toLowerCase()%]/:id", route.protected, [%=entity.name%]Controller.update);
+  router.delete("/[%=entity.name.toLowerCase()%]/:id", route.protected, [%=entity.name%]Controller.delete);
+};

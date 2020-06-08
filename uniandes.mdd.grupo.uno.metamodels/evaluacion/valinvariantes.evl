@@ -1,0 +1,22 @@
+import '../validation/validaciones.eol';
+
+//validacion de la compañia
+context validaInvariantes!Company {
+
+//validacion del nit 
+	critique invalidNit {
+		check : self.invalidNit()
+		message : "nit " + self.nit + " No es correcto"
+	}
+	
+}
+
+//validacion de los atributos
+context validaInvariantes!Attribute {
+
+//validacion del nombre de los elementos
+	critique invalidName {
+		check : self.invalidName()
+		message : "atributo " + self.name + " No es correcto"
+	}
+}

@@ -1,0 +1,132 @@
+var basedir = antProject.getBaseDir();
+var MODEL_PATH = basedir + "/egl-transformations/back/app/";
+var FRONT_PATH = basedir + "/egl-transformations/front/app/";
+var CARPETA: String;
+var EXTENSION:String;
+
+@model
+operation loadModels() {
+  runTarget("load-models");
+}
+
+@test
+operation transformationWorksAsExpected() {
+  runTarget("egl");
+}
+
+@test
+operation validaModelsBack() {
+	CARPETA = MODEL_PATH + "models/";
+	EXTENSION = ".model.js";
+	cicloEntities();	
+}
+
+@test
+operation validaControllersBack() {
+	CARPETA = MODEL_PATH + "controllers/";
+	EXTENSION = ".controller.js";
+	cicloEntities();	
+}
+
+@test
+operation validaRoutesBack() {
+	CARPETA = MODEL_PATH + "routes/";
+	EXTENSION = ".js";
+	cicloEntities();	
+}
+
+
+@test
+operation validateRouteContent(){
+	CARPETA = MODEL_PATH + "routes/";
+	EXTENSION = ".js";
+	var entities = cp!Entity.allInstances;
+	var ruta: String;	
+	for (entity in entities){
+		ruta = CARPETA + entity.name.toLowerCase() + EXTENSION;
+		assertLineWithMatch(ruta, '("/'+entity.name.toLowerCase()+'", route.protected, '+entity.name+'Controller.create)');
+		assertLineWithMatch(ruta, '("/'+entity.name.toLowerCase()+'", route.protected, '+entity.name+'Controller.getAll)');
+		assertLineWithMatch(ruta, '("/'+entity.name.toLowerCase()+'/:id", route.protected, '+entity.name+'Controller.get)');
+		assertLineWithMatch(ruta, '("/'+entity.name.toLowerCase()+'/:id", route.protected, '+entity.name+'Controller.update)');
+		assertLineWithMatch(ruta, '("/'+entity.name.toLowerCase()+'/:id", route.protected, '+entity.name+'Controller.delete)');
+	}
+}
+
+@test
+operation validateModelContent(){
+	CARPETA = MODEL_PATH + "models/";
+	EXTENSION = ".model.js";
+	var entities = cp!Entity.allInstances;
+	var ruta: String;	
+	for (entity in entities){
+	ruta = CARPETA + entity.name.toLowerCase() + EXTENSION;
+	for (attribute in entity.attributes) {
+		assertLineWithMatch(ruta, attribute.name+': \\{ type: '+attribute.type+', required:  '+attribute.required+' \\}');
+	}
+	}
+}
+
+@test
+operation validateControllerContent(){
+	CARPETA = MODEL_PATH + "controllers/";
+	EXTENSION = ".controller.js";
+	var entities = cp!Entity.allInstances;
+	var ruta: String;	
+	var entity= entities.at(0);
+	for (entity in entities){
+	ruta = CARPETA + entity.name.toLowerCase() + EXTENSION;
+	
+	assertLineWithMatch(ruta, entity.name+'.create\\(req.body, function \\(err, result\\) \\{');
+	assertLineWithMatch(ruta, entity.name+'.get\\(\\{ _id: req.params.id \\}, function \\(err, result\\) \\{');
+	assertLineWithMatch(ruta, entity.name+'.getAll\\(\\{\\}, function \\(err, result\\) \\{');
+	assertLineWithMatch(ruta, entity.name+'.updateById\\(req.params.id, req.body, function \\(err, result\\) \\{');
+	assertLineWithMatch(ruta, entity.name+'.removeById\\(\\{ _id: req.params.id \\}, function \\(err, result\\) \\{');	
+	}
+}
+
+operation cicloEntities(){
+	var entities = cp!Entity.allInstances;
+	var ruta: String;	
+	for (entity in entities){
+		ruta = CARPETA + entity.name.toLowerCase() + EXTENSION;
+		var archivo = new Native('java.io.File')(ruta);
+		assertTrue("Archivo " + entity.name.toLowerCase() + EXTENSION + " no existe",archivo.exists());	
+	}
+}
+
+@test
+operation validateHtml(){
+	EXTENSION = ".component.html";
+	cicloPanel();
+}
+
+@test
+operation validatePanelJs(){	
+	EXTENSION = ".component.js";
+	cicloPanel();
+}
+
+@test
+operation existSidebar(){
+	CARPETA = FRONT_PATH + "public/layout/sidebar/";
+	EXTENSION = "sidebar.component.ts";
+	var ruta: String;
+	ruta = CARPETA + EXTENSION;
+	var archivo = new Native('java.io.File')(ruta);
+	archivo.println();
+	archivo.exists().println();
+	assertTrue("El archivo " + EXTENSION + " no existe",archivo.exists());
+}
+
+operation cicloPanel(){
+	var panel = cp!Panel.allInstances;
+	var ruta: String;
+	for ( p  in panel ){
+		CARPETA = FRONT_PATH + "public/components/" + p.name.toLowerCase() + "/";
+		ruta = CARPETA + p.name.toLowerCase() + EXTENSION;
+		var archivo = new Native('java.io.File')(ruta);
+		archivo.println();
+		archivo.exists().println();
+		assertTrue("El archivo " + p.name.toLowerCase() + EXTENSION + " no existe",archivo.exists());
+	}
+}

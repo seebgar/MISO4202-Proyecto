@@ -1,0 +1,463 @@
+[%
+
+	// ==================================================================
+	// BACKEND
+	// ==================================================================
+	
+	
+	
+	var destdir = "back";
+	var entities = cp!Entity.all; 
+  	  	
+	// =================================
+	// MODELS
+	// =================================
+	
+	// ENTITIES
+	for (entity in entities) { 
+		TemplateFactory.setOutputRoot(destdir + "/app/models/");
+		var tbm:Template:= TemplateFactory.load('back/Model.egl');
+		tbm.populate("entity", entity);
+		tbm.generate(entity.name.toLowerCase()+'.model.js');
+	}
+	
+	// USER
+	var tbu:Template:= TemplateFactory.load('back/UserModel.egl');
+	tbu.generate('user.model.js');
+	
+
+	// =================================
+	// CONTROLLERS
+	// =================================
+	
+	// ENTITIES
+	for (entity in entities) {
+		TemplateFactory.setOutputRoot(destdir + "/app/controllers/");
+		var tbc:Template:= TemplateFactory.load('back/Controller.egl');
+		tbc.populate("entity", entity);
+		tbc.generate(entity.name.toLowerCase()+'.controller.js');	
+	}
+	
+	// USER
+	var tbu:Template:= TemplateFactory.load('back/UserController.egl');
+	tbu.generate('user.controller.js');
+	
+	// =================================
+	// ROUTES
+	// =================================
+	
+	// ENTITIES
+	for (entity in entities) { 
+		TemplateFactory.setOutputRoot(destdir + "/app/routes/");
+		var tbr:Template:= TemplateFactory.load('back/Routes.egl');
+		tbr.populate("entity", entity);
+		tbr.generate(entity.name.toLowerCase()+'.js');	
+	}
+	
+	// USER
+	var tbur:Template:= TemplateFactory.load('back/UserRoutes.egl');
+	tbur.generate('user.js');
+
+	// =================================
+	// DATABASE
+	// =================================	
+	
+	TemplateFactory.setOutputRoot(destdir + "/app/config/");
+	var tbdb:Template:= TemplateFactory.load('back/DataBase.egl');
+	tbdb.generate('database.js');
+	
+	// =================================
+	// JWT
+	// =================================
+	
+	var tbjt:Template:= TemplateFactory.load('back/Jwt.egl');
+	tbjt.generate('jwt.js');
+	
+	// =================================
+	// MIDDLEWARE
+	// =================================
+	
+	var tbmw:Template:= TemplateFactory.load('back/Middleware.egl');
+	tbmw.generate('middleware.js');
+	
+	// =================================
+	// ROLE
+	// =================================
+	
+	var tbmw:Template:= TemplateFactory.load('back/Role.egl');
+	//tbr.populate("entity", entity);
+	tbmw.generate('role.js');	
+	
+	// =================================
+	// PACKAGE.JSON
+	// =================================
+	
+	TemplateFactory.setOutputRoot(destdir + "/app/");
+	var tbpg:Template:= TemplateFactory.load('back/PackageJson.egl');
+	tbpg.generate('package.json');
+	
+	// =================================
+	// ROOT
+	// =================================
+
+	// EXPRESS WWW
+	TemplateFactory.setOutputRoot(destdir + "/app/bin");
+	var tbpg:Template:= TemplateFactory.load('back/Server.egl');
+	tbpg.generate('www');
+	
+	// APP.JS
+	TemplateFactory.setOutputRoot(destdir + "/app/");
+	var tbpg:Template:= TemplateFactory.load('back/App.egl');
+	tbpg.generate('app.js');
+	
+	
+	
+	
+	
+	// ==================================================================
+	// FRONTEND
+	// ==================================================================
+	
+	
+	
+	
+	
+	
+	
+	
+	// ==================================================================
+	// NGX CONFIG
+	// ==================================================================
+	
+	// ANGULAR JSON
+	TemplateFactory.setOutputRoot("front/ngx/");
+	var tbpg:Template:= TemplateFactory.load('front/EGL/ngx/angular.json.egl');
+	tbpg.generate('angular.json');
+	
+	// BROWSER LIST
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg := TemplateFactory.load('front/EGL/ngx/browserslist.egl');
+	tbpg.generate('browserslist');
+	
+	// INDEX JS
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/index.js.egl');
+	tbpg.generate('index.js');
+	
+	// KARMA CONFIG
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/karma.conf.js.egl');
+	tbpg.generate('karma.conf.js');
+	
+	// KARMA CONFIG
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/karma.conf.js.egl');
+	tbpg.generate('karma.conf.js');
+	
+	// PACKAGE JSON
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/package.json.egl');
+	tbpg.generate('package.json');
+	
+	// TSCONFIG APP JSON
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/tsconfig.app.json.egl');
+	tbpg.generate('tsconfig.app.json');
+	
+	// TSCONFIG JSON
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/tsconfig.json.egl');
+	tbpg.generate('tsconfig.json');
+	
+	// TSCONFIG SPEC JSON
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/tsconfig.spec.json.egl');
+	tbpg.generate('tsconfig.spec.json');
+	
+	// TSLINT JSON
+	TemplateFactory.setOutputRoot("front/ngx/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/tslint.json.egl');
+	tbpg.generate('tslint.json');
+	
+	// E2E
+	TemplateFactory.setOutputRoot("front/ngx/e2e");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/e2e/tsconfig.json.egl');
+	tbpg.generate('tsconfig.json');
+	
+	tbpg:= TemplateFactory.load('front/EGL/ngx/e2e/protractor.conf.js.egl');
+	tbpg.generate('protractor.conf.js');
+	
+	TemplateFactory.setOutputRoot("front/ngx/e2e/src");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/e2e/src/app.e2e-spec.ts.egl.ts.egl');
+	tbpg.generate('app.e2e-spec.ts.egl.ts');
+	
+	tbpg:= TemplateFactory.load('front/EGL/ngx/e2e/src/app.po.ts.egl.ts.egl');
+	tbpg.generate('app.po.ts.egl.ts');
+	
+	
+	// ==================================================================
+	// SRC
+	// ==================================================================
+	
+	// NGX THEME
+	TemplateFactory.setOutputRoot("front/ngx/src/");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/themes.scss.egl');
+	tbpg.generate('themes.scss');
+	
+	// STYLE
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/styles.scss.egl');
+	tbpg.generate('styles.scss');
+	
+	// INDEX
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/index.html.egl');
+	tbpg.generate('index.html');
+	
+	// MAIN TS
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/main.ts.egl');
+	tbpg.generate('main.ts');
+	
+	// MAIN TS
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/main.ts.egl');
+	tbpg.generate('main.ts');
+	
+	// POLYFILLS
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/polyfills.ts.egl');
+	tbpg.generate('polyfills.ts');
+	
+	// TEST FILE
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/test.ts.egl');
+	tbpg.generate('test.ts');
+	
+	// NGX THEME
+	TemplateFactory.setOutputRoot("front/ngx/src/environments");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/environments/environment.ts.egl');
+	tbpg.generate('environment.ts');
+	
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/environments/environment.prod.ts.egl');
+	tbpg.generate('environment.prod.ts');
+	
+	// CSV SAMPLE
+	TemplateFactory.setOutputRoot("front/ngx/src/assets/CSV");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/assets/CSV/insumos.csv.egl');
+	tbpg.generate('insumos.csv');
+	
+	// =================================
+	// SEVICES
+	// =================================
+	
+	TemplateFactory.setOutputRoot("front/ngx/src/app/service");
+	
+	// MAIN
+	var tbmMainService :Template:= TemplateFactory.load('front/EGL/ngx/src/app/service/main.service.ts.egl');  
+	tbmMainService.generate('main.service.ts');
+	
+	// TEST
+	tbmMainService := TemplateFactory.load('front/EGL/ngx/src/app/service/main.service.spec.ts.egl');  
+	tbmMainService.generate('main.service.spec.ts');
+	
+	// JWT Interceptor
+	var tbmJWT :Template:= TemplateFactory.load('front/EGL/ngx/src/app/service/jwt-interceptor.service.ts.egl');  
+	tbmJWT.generate('jwt-interceptor.service.ts');
+	
+	// ERROR INTERCEPTOR
+	var tbmErrorInt :Template:= TemplateFactory.load('front/EGL/ngx/src/app/service/error-interceptor.service.ts.egl');  
+	tbmErrorInt.generate('error-interceptor.service.ts');
+	
+	// AUTH 
+	var tbmAuth :Template:= TemplateFactory.load('front/EGL/ngx/src/app/service/authentication.service.ts.egl');  
+	tbmAuth.generate('authentication.service.ts');
+	
+	// AUTH GAURD
+	var tbmAuthGuard :Template:= TemplateFactory.load('front/EGL/ngx/src/app/service/auth-guard.service.ts.egl');  
+	tbmAuthGuard.generate('auth-guard.service.ts');
+	
+	
+	// =================================
+	// APP ROOT
+	// =================================
+
+	
+	// APP MODULE
+	TemplateFactory.setOutputRoot("front/ngx/src/app");
+	var tbmAppModule :Template:= TemplateFactory.load('front/EGL/ngx/src/app/app.module.ts.egl');  
+	tbmAppModule.populate("elements", cp!Element.all.select(element | element.isKindOf(cp!Table) ) );
+	tbmAppModule.generate('app.module.ts');
+	
+	// APP ROUTING
+	var tbmAppMRouting :Template:= TemplateFactory.load('front/EGL/ngx/src/app/app-routing.module.ts.egl');  
+	tbmAppMRouting.populate("elements", cp!Element.all.select(element | element.isKindOf(cp!Table) ) );
+	tbmAppMRouting.generate('app-routing.module.ts');
+	
+	// APP COMPONENT
+	var tbmAppMRouting :Template:= TemplateFactory.load('front/EGL/ngx/src/app/app.component.ts.egl');  
+	tbmAppMRouting.generate('app.component.ts');
+	
+	
+	// MODELS
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/model");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/model/login.model.ts.egl');
+	tbpg.generate('login.model.ts');
+	
+	
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/model");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/model/user.model.ts.egl');
+	tbpg.generate('user.model.ts');
+
+	
+	
+	// =================================
+	// COMPONENTES
+	// =================================
+	
+	// DASHBOARDS
+	var companys = cp!Company.all;
+	for (company in companys){
+		for ( dash in company.dashboards ) {
+ 			for (panel in dash.panels) {
+				for ( element in panel.elements ){
+				
+					if (element.isKindOf(cp!Table) or element.isKindOf(cp!Graphic) ) {
+						TemplateFactory.setOutputRoot("front/ngx/src/app/public/components/" + element.name.toLowerCase());
+						var tbmf:Template;  // para component
+						var tbmfHTML :Template;  // para html
+						var tbmfSCSS :Template;  // para style
+						var tbmfTest :Template;  // para test - specs.ts
+						
+						// STYLE FILE
+						tbmfSCSS:= TemplateFactory.load('front/EGL/style/STYLE.egl');
+						tbmfSCSS.generate(element.name.toLowerCase()+'.component.scss');
+						
+						// SPECS FILE
+						tbmfTest:= TemplateFactory.load('front/EGL/test/Specs.egl');
+						tbmfTest.populate("element", element);
+						tbmfTest.generate(element.name.toLowerCase()+'.component.spec.ts');
+						
+										
+						// TABLES
+						if (element.isKindOf(cp!Table)) {
+							tbmf:= TemplateFactory.load('front/EGL/components/Table.egl');
+							
+							// COMPONENT FILE
+							tbmf.populate("element", element);
+							tbmf.generate(element.name.toLowerCase()+'.component.ts');
+			
+							// HTML FILE
+							tbmfHTML:= TemplateFactory.load('front/EGL/html/HTML-Table.egl');
+							tbmfHTML.generate(element.name.toLowerCase()+'.component.html');
+						}
+						
+						// CHARTS
+						
+						else if (element.isKindOf(cp!Graphic)) {
+						TemplateFactory.setOutputRoot("front/ngx/src/app/public/components/graph/" + element.name.toLowerCase());
+							tbmf:= TemplateFactory.load('front/EGL/components/Graphic.egl'); 
+							
+							// html de un chart, se decalra en el template del componente
+							// COMPONENT FILE
+							tbmf.populate("element", element);
+							tbmf.generate(element.name.toLowerCase()+'.component.ts');
+						}	
+						
+					
+					}	
+				} 
+ 			}
+		}
+	}
+	
+	// HOME
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/home/");
+	var tbmHome :Template:= TemplateFactory.load('front/EGL/components/Home.egl');  
+	tbmHome.generate('home.component.ts');
+	
+	// MENU
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/layout/sidebar/");
+	var tbmMenu :Template:= TemplateFactory.load('front/EGL/components/Menu.egl');  
+	tbmMenu.generate('sidebar.component.ts');
+	
+	// HEADER
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/layout/header/");
+	var tbmHeader :Template:= TemplateFactory.load('front/EGL/components/Header.egl');  
+	tbmHeader.generate('header.component.ts');
+	var tbmHeaderHTML :Template:= TemplateFactory.load('front/EGL/html/Header.egl');  
+	tbmHeaderHTML.generate('header.component.html');
+	var tbmHeaderSTYLE :Template:= TemplateFactory.load('front/EGL/style/Header.egl');  
+	tbmHeaderSTYLE.generate('header.component.scss');
+	
+	// FOOTER
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/layout/footer/");
+	var tbmFooter :Template:= TemplateFactory.load('front/EGL/components/Footer.egl');  
+	tbmFooter.generate('footer.component.ts');
+	var tbmFooterHTML :Template:= TemplateFactory.load('front/EGL/html/Footer.egl');  
+	tbmFooterHTML.generate('footer.component.html');
+	
+	// LOGIN
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/components/register/");
+	var tbmLogin :Template:= TemplateFactory.load('front/EGL/components/Register.egl');  
+	tbmLogin.generate('register.component.ts');
+	var tbmLoginHTML :Template:= TemplateFactory.load('front/EGL/html/Register.egl');  
+	tbmLoginHTML.generate('register.component.html');
+	
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/components/login");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/login/login.component.html.egl');
+	tbpg.generate('login.component.html');
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/login/login.component.ts.egl');
+	tbpg.generate('login.component.ts');
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/login/login.component.scss.egl');
+	tbpg.generate('login.component.scss');
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/login/login.component.spec.ts.egl');
+	tbpg.generate('login.component.spec.ts');
+	
+	
+	
+	// DASHBOARD
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/components/dashboard");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/dashboard/dashboard.component.html.egl');
+	tbpg.generate('dashboard.component.html');
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/dashboard/dashboard.component.ts.egl');
+	tbpg.generate('dashboard.component.ts');
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/dashboard/dashboard.component.scss.egl');
+	tbpg.generate('dashboard.component.scss');
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/dashboard/dashboard.component.spec.ts.egl');
+	tbpg.generate('dashboard.component.spec.ts');
+	
+	// generic chart
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/components/chart");
+	tbpg:= TemplateFactory.load('front/EGL/ngx/src/app/public/components/chart/chart.component.ts.egl');
+	tbpg.generate('chart.component.ts');
+	
+
+	
+
+	
+	
+	// =================================
+	// CSV DATA UPLOAD
+	// =================================
+	
+	TemplateFactory.setOutputRoot("front/ngx/src/app/public/components/data");
+	
+	var tbmfCSV :Template;  // para CSV Uploader
+	var tbmfCSVHTML :Template;  // para CSV Uploader
+
+	tbmfCSV:= TemplateFactory.load('front/EGL/components/CSV_UPLOADER.egl');
+	tbmfCSV.populate("elements", cp!Element.all.select(el | el.isKindOf(cp!Table) ));
+	tbmfCSV.generate('data.component.ts');
+	
+	// html
+	tbmfCSVHTML:= TemplateFactory.load('front/EGL/html/CSV.egl');
+	tbmfCSVHTML.populate("elements", cp!Element.all.select(el | el.isKindOf(cp!Table) ) );
+	tbmfCSVHTML.generate('data.component.html');
+	
+	
+	
+	
+	
+	// =================================
+	// END
+	// =================================
+	
+	"end EGL".println();
+%] 
+
+

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/uniandes.mdd.grupo.uno.metamodels/src" modelPluginID="uniandes.mdd.grupo.uno.metamodels"
+    modelName="Company" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>../metamodels/metamodelo.ecore</foreignModel>
+  <genPackages prefix="Empresa" disposableProviderFactory="true" ecorePackage="metamodelo.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodelo.ecore#//DBSystem">
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//DBSystem/MONGODB"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//DBSystem/REDIS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodelo.ecore#//PositionOptions">
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//PositionOptions/left"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//PositionOptions/right"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//PositionOptions/center"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//PositionOptions/top"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//PositionOptions/bottom"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="metamodelo.ecore#//Colors">
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/white"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/blue"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/red"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/green"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/gray"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/yellow"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/black"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/cyan"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/magenta"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/silver"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/maroon"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/olive"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/purple"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/teal"/>
+      <genEnumLiterals ecoreEnumLiteral="metamodelo.ecore#//Colors/navy"/>
+    </genEnums>
+    <genClasses ecoreClass="metamodelo.ecore#//Company">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Company/dashboards"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Company/DBServers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Company/nit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Company/name"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Dashboard">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Dashboard/panels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Dashboard/name"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Panel">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Panel/elements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Panel/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodelo.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Element/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Element/title"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Table">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Table/registersPerPage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Table/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Table/columns"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Table/search"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Table/add"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodelo.ecore#//Graphic">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Graphic/data"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Graphic/legendPosition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Graphic/labels"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//DBServer">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//DBServer/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//DBServer/systemManager"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//DBServer/token"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//DBServer/password"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//DBServer/relatedCollections"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Entity/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Entity/attributes"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Action">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Action/columnTitle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Action/add"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Action/filter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Action/edit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Action/delete"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Action/position"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Action/name"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Column">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Column/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Column/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Column/filter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Column/editable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Column/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Column/attribute"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Menu">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Menu/options"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Option">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Option/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Option/icon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Option/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Option/urlComponent"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//LineChart"/>
+    <genClasses ecoreClass="metamodelo.ecore#//BarChart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//BarChart/barPercentage"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//RadarChart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//RadarChart/angleLinesDisplay"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//PieChart"/>
+    <genClasses ecoreClass="metamodelo.ecore#//Data">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Data/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Data/category"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Data/data"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Data/borderColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Data/backgroundColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Data/fill"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Data/borderDash"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference metamodelo.ecore#//Data/attribute"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="metamodelo.ecore#//Graphic2D">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Graphic2D/labelStringXAxes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Graphic2D/displayGridLinesXAxes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Graphic2D/colorGridLinesXAxes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Graphic2D/labelStringYAxes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Graphic2D/displayGridLinesYAxes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Graphic2D/colorGridLinesYAxes"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Label">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Label/name"/>
+    </genClasses>
+    <genClasses ecoreClass="metamodelo.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Attribute/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Attribute/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metamodelo.ecore#//Attribute/required"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProyectoGrupo1:Company xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ProyectoGrupo1="ProyectoGrupo1" nit="4202" name="MISO">
+  <dashboards name="ADMIN">
+    <panels name="Quimicos">
+      <elements xsi:type="ProyectoGrupo1:Table" name="Quimicos" title="Quimicos" registersPerPage="5" search="true" add="true">
+        <actions columnTitle="Opciones" add="true" filter="true" edit="true" delet="true" name="Opciones"/>
+        <columns name="nombre" title="Nombre" filter="true" editable="true"/>
+        <columns name="sku" title="SKU" filter="true"/>
+        <columns name="inventarioActual" title="Inventario Actual" filter="true" editable="true"/>
+        <columns name="stockMinimo" title="Stock Minimo" filter="true" editable="true"/>
+        <columns name="stockMedio" title="Stock Medio" filter="true" editable="true"/>
+        <columns name="stockMaximo" title="Stock Maximo" filter="true" editable="true"/>
+        <columns name="unidad" title="Unidad" filter="true" editable="true"/>
+        <columns name="reOrden" title="Re Orden" filter="true" editable="true"/>
+      </elements>
+    </panels>
+  </dashboards>
+  <DBServers>
+    <relatedEntities name="Quimicos">
+      <attributes type="String" name="nombre" required="true"/>
+      <attributes type="Date" name="createdAt"/>
+      <attributes type="String" name="viscosidad"/>
+    </relatedEntities>
+  </DBServers>
+</ProyectoGrupo1:Company>

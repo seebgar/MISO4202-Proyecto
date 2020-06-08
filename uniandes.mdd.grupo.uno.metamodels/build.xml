@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- AUTOMATIZACION DE LA CADENA DE TRANSFORMACION M2T -->
+
+<!-- RUN AS -> EXTERNAL TOOLS CONFIGURATION ... -> ANT BUILD -> JRE -> RUN IN THE SAME JRE -->
+
+<!-- TARGET DE ENTRADA -> LE INDICA A ANT LO QUE SE EJECUTARA PRIMERO -->	
+<project default="build">
+	<!-- VARIABLES -> SE DECLARAN LAS TRANSFORMACION, MODELOS, METAMODELOS -->
+	<property name="generated.location.back" location="${basedir}/egl-transformations/back/app"/>
+	<property name="generated.location.front" location="${basedir}/egl-transformations/front/ngx"/>
+	<property name="transformations.location" location="${basedir}/egl-transformations/saveComponent.egl"/>
+	
+	<property name="models.location" location="${basedir}/models"/>
+	<property name="metamodels.location" location="${basedir}/metamodels"/>
+	
+	<property name="empresa.metamodel.location" location="${metamodels.location}/metamodelo.ecore" />
+	<property name="empresa.metamodel.uri" value="ProyectoGrupo1" />
+	
+		
+	<!-- PROCESOS A EJECUTAR POR PARTE DE ANT -->
+	
+	<target name="build">
+	  <echo>0. Borrando el contenido de la carpeta generated</echo>
+	  
+	  <!-- BORRA TODO LO QUE EXITIERA EN GENERATED PARA TENER LA CARPETA LIMPIA -->
+	  <delete dir="${generated.location.back}" failonerror="true" />
+	  <delete dir="${generated.location.front}" failonerror="true" />
+	  
+	  <!-- LLAMADO AL SIGUIENTE PROCESO -->
+	  <antcall target="m2t" />
+	</target>
+	
+	<target name="m2t">
+	  	<echo>Transformacion EGL (M2T)</echo>
+	
+		<!-- REGISTER EPACKAGES -->
+		<epsilon.emf.register file="${empresa.metamodel.location}"/>
+	
+		<!-- CARGAR EL MODELO  -->
+	  	<epsilon.emf.loadModel name="cp" modelfile="${models.location}/Company.xmi" metamodeluri="${empresa.metamodel.uri}" read="true" store="true" />
+	
+		<!-- TRANSFORMACION  Y LOS MODELOS QUE USUARAN --> 
+		<epsilon.egl src="${transformations.location}">
+	  		<model ref="cp" />
+	  	</epsilon.egl>
+	
+		<!-- SE CIERRAN LOS ARCHIVOS -->
+	  <epsilon.disposeModels/>
+	</target>
+	
+	
+
+</project>

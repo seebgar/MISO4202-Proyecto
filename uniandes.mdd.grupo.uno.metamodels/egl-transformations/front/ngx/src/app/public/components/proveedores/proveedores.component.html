@@ -1,0 +1,90 @@
+<nb-card>
+  <nb-card-body>
+    <ng-container
+      *ngIf="isAdmin(); then adminPanel; else userPanel"
+    ></ng-container>
+  </nb-card-body>
+</nb-card>
+
+<!-- Template si usuario es Admin -->
+<ng-template #adminPanel>
+  <div>
+    <div>
+      <div>
+        <h2>{{ titulo }}</h2>
+      </div>
+      <div
+        [nbSpinner]="cargando"
+        nbSpinnerStatus="primary"
+        nbSpinnerSize="large"
+        nbSpinnerMessage="Cargando"
+        style="min-height: 100px;"
+      >
+        <div class="row" style="margin-bottom: 1rem;">
+          <div class="col-6">
+            <input
+              #search
+              class="d-inline p-2 form-control"
+              type="text"
+              placeholder="Buscar ..."
+              (keyup)="onSearch({ query: search.value })"
+            />
+          </div>
+          <div class="col-6">
+          <!--  <button
+              nbButton
+              status="success"
+              size="xsmall"
+              class="d-inline p-2 pull-right"
+              (click)="handleModalAgregar()"
+            >
+              <i class="fa fa-plus"></i> Agregar
+            </button> -->
+          </div>
+        </div>
+        <br />
+        <ng2-smart-table
+          [settings]="settings"
+          [source]="source"
+          (createConfirm)="onCreate({ content: $event })"
+          (editConfirm)="onUpdate({ content: $event })"
+          (deleteConfirm)="onDelete({ content: $event })"
+        ></ng2-smart-table>
+      </div>
+      <!-- <nb-card-footer></nb-card-footer> -->
+    </div>
+  </div>
+</ng-template>
+
+<!-- Template si usuario no es Admin -->
+<ng-template #userPanel>
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <nb-card class="text-center col-12">
+        <nb-card-body>
+          <h2 class="title">401<br />Acceso Denegado</h2>
+          <br />
+          <button
+            nbButton
+            fullWidth
+            type="button"
+            class="home-button"
+            style="max-width: 30vw; cursor: pointer;"
+            (click)="
+              routerNavigateTo({
+                path: '/dashboard/home'
+              })
+            "
+          >
+            Volver a Inicio
+          </button>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Tamplate Dialog Agregar  -->
+<ng-template #dialogAgregar let-data let-ref="dialogRef">
+  <h1>Proximamente ...</h1>
+</ng-template>

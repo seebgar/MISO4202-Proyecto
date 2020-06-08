@@ -1,0 +1,65 @@
+﻿<project>
+
+	<!-- Estas propiedades definen la ubicación de los modelos, metamodelos 
+		y las URI de los mismos -->
+
+	<property name="models.location" location="${basedir}/models" />
+
+	<property name="company.model.location"
+		location="${models.location}/Company.xmi" />
+
+	<property name="metamodels.location"
+		location="${basedir}/metamodels" />
+
+	<property name="metamodelo.metamodel.location"
+		location="${metamodels.location}/metamodelo.ecore" />
+
+	<property name="company.metamodel.uri" value="ProyectoGrupo1" />
+
+
+	<property name="graph.metamodel.uri" value="Graph" />
+
+	<!-- Estas propiedades definen la ubicación de los tests (archivos eunit) -->
+
+	<property name="tests.location" location="${basedir}/tests" />
+
+	<property name="anttargetmodels.eunit.location"
+		location="${tests.location}/load-models-ant-target.eunit" />
+
+	<!-- Estas propiedades definen las transformaciones (archivos egl) -->
+
+	<property name="transformation.location"
+		location="${basedir}/egl-transformations" />
+
+	<property name="transformation.egl.location"
+		location="${transformation.location}/saveComponent.launch" />
+
+	<!-- Este target se encarga de registrar el metamodelo -->
+
+	<target name="with-model-loading-target"
+		description="Registra los metamodelos">
+		<epsilon.emf.register
+			file="${metamodelo.metamodel.location}" />
+		<epsilon.eunit src="${anttargetmodels.eunit.location}" />
+	</target>
+
+	<!-- Este target se lanzará desde un método del archivo EUnit anotado con 
+		@models. Esto es útil cuando se desea reusar las mismas tareas para la carga 
+		de modelos entre distintas test suites. -->
+
+	<target name="load-models"
+		description="Carga los modelos según el metamodelo de cada uno">
+		<epsilon.emf.loadModel name="cp"
+			modelfile="${company.model.location}"
+			metamodeluri="${company.metamodel.uri}" read="true" store="false" />
+	</target>
+
+	<target name="egl">
+		<epsilon.egl
+			src="${transformation.location}/saveComponent.egl">
+			<!-- reference to the Tree model loaded in the EUnit suite -->
+			<model ref="cp" />
+		</epsilon.egl>
+	</target>
+
+</project>

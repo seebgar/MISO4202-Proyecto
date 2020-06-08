@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ProyectoGrupo1:Company xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ProyectoGrupo1="ProyectoGrupo1" nit="8001594532" name="empresa1">
+  <dashboards name="Dashboard1">
+    <panels name="cuadro1">
+      <elements xsi:type="ProyectoGrupo1:LineChart">
+        <labels name="Febrero"/>
+        <labels name="Marzo"/>
+      </elements>
+    </panels>
+  </dashboards>
+  <DBServers name="BDMongo" password="158456465">
+    <relatedCollections name="Inventario">
+      <documents name="registo1"/>
+      <documents name="registro2"/>
+    </relatedCollections>
+    <relatedCollections name="Producto">
+      <documents name="registro1"/>
+      <documents name="registro2"/>
+    </relatedCollections>
+  </DBServers>
+</ProyectoGrupo1:Company>
